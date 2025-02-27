@@ -1,4 +1,4 @@
-/* RESET/BASIC STYLES */
+/* RESET / BASIC STYLES */
 * {
   margin: 0;
   padding: 0;
@@ -35,9 +35,10 @@ body {
   font-weight: 500;
 }
 
+/* BUTTONS */
 .btn-primary {
   padding: 0.5rem 1rem;
-  background-color: #7c3aed;
+  background-color: #7c3aed; 
   border: none;
   color: #fff !important;
   text-decoration: none;
@@ -101,7 +102,7 @@ body {
 
 .hero-image {
   flex: 1;
-  border: #7c3aed solid 5px;
+  border: 5px solid #7c3aed; 
   border-radius: 8px;
   min-width: 300px;
   text-align: center;
@@ -113,7 +114,7 @@ body {
   border-radius: 8px;
 }
 
-/* ALGORITHM RESULTS */
+/* ALGORITHM RESULTS SECTION */
 .algorithm-results {
   text-align: center;
   padding: 2rem;
@@ -166,15 +167,15 @@ body {
 
 /* MODAL */
 .algo-modal {
-  display: none; /* Hidden by default */
+  display: none; 
   position: fixed;
   z-index: 999;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  overflow: auto; /* enable scroll if needed */
-  background-color: rgba(0, 0, 0, 0.7); /* dark overlay */
+  overflow: auto; 
+  background-color: rgba(0, 0, 0, 0.7); 
   text-align: center;
   padding-top: 60px;
 }
@@ -258,4 +259,144 @@ body {
   padding: 2rem 1rem;
   margin-top: 2rem;
   border-top: 1px solid #eee;
+}
+
+/*********************************************
+  PREDICT PAGE STYLES
+*********************************************/
+.predict-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  text-align: center;
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.section-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.predict-card {
+  background-color: #f7f8fa;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.prediction-result {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #4a4a4a;
+}
+
+.prediction-detail {
+  font-size: 1rem;
+  color: #555;
+  margin: 0.25rem 0;
+}
+
+.prediction-prompt {
+  color: #666;
+  font-size: 1rem;
+  margin-bottom: 0;
+}
+
+/* Positive/Negative color highlights */
+.positive {
+  color: #27ae60; /* green */
+}
+.negative {
+  color: #e74c3c; /* red */
+}
+
+.predict-form {
+  margin-bottom: 2rem;
+}
+
+/*********************************************
+  HOME ICON
+*********************************************/
+.home-icon-link {
+  font-size: 1.5rem;
+  color: #4a4a4a;
+  margin-left: 1rem;
+  text-decoration: none;
+}
+
+.home-icon-link:hover {
+  color: #5b4eff;
+}
+
+/*********************************************
+  FILE INPUT STYLES
+*********************************************/
+/* Hide the default file input (so we can style a custom label) */
+input[type="file"] {
+  display: none;
+}
+
+/* Custom label that looks like a button */
+.file-button {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  margin-right: 1rem;
+  background-color: #5b4eff;
+  color: #fff;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.file-button:hover {
+  background-color: #3b2ebf;
+}
+
+/* Show file name next to the button */
+#file-name-display {
+  display: inline-block;
+  margin-left: 1rem;
+  margin-right: 10px;
+  font-style: italic;
+  color: #555;
+}
+
+.back-link {
+  margin-top: 1rem;
+}
+
+.back-link a {
+  text-decoration: none;
+  color: #5b4eff;
+  font-weight: 500;
+}
+
+.back-link a:hover {
+  text-decoration: underline;
+}
+/* Default hidden class for the close button */
+.hidden {
+  display: none;
+}
+
+/* The close-file button (X) style */
+.close-file {
+  margin-left: 0.5rem;
+  cursor: pointer;
+  color: #999;
+  font-weight: bold;
+  font-size: 1.2rem; /* adjust size if you like */
+  transition: color 0.2s;
+}
+
+.close-file:hover {
+  color: red; /* The requested hover color */
 }

@@ -1,27 +1,105 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Parkinson's Detection</title>
-  </head>
-  <body>
-    <h1>Parkinson's Prediction</h1>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Parkinson's Detection</title>
+  <!-- Link to your Flask static CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
-    {% if prediction_text %}
-      <h3>{{ prediction_text }}</h3>
-      <p>Jitter: {{ jitter_val }}</p>
-      <p>Shimmer: {{ shimmer_val }}</p>
-      <p>Mean F0: {{ mean_f0_val }}</p>
-    {% else %}
-      <p>Upload an audio file to get a prediction.</p>
-    {% endif %}
+  <!-- (Optional) Font Awesome for home icon -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    integrity="sha512-7QOM6OCT2mdfMHTceXvQW3iA5g9pRUJ8EQtNxnNj9mpO+0qhp9Af6gIO5s2O19hYgjivYf3Y6Zg6p9+WurmvTg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+</head>
+<body>
 
-    <form method="POST" action="{{ url_for('predict') }}" enctype="multipart/form-data">
-      <label for="audio_file">Choose an audio file:</label>
-      <input type="file" name="audio_file" id="audio_file" accept="audio/*" required>
-      <button type="submit">Predict</button>
-    </form>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="navbar-left">
+      <a href="#" class="logo">Parkinson's Detection</a>
+    </div>
+    <div class="navbar-right">
+      <!-- Home icon link -->
+      <a href="{{ url_for('home') }}" class="home-icon-link">
+        <i class="fas fa-home"></i>
+      </a>
+    </div>
+  </nav>
 
-    <br>
-    <a href="{{ url_for('home') }}">Back to Accuracies</a>
-  </body>
+  <!-- Main Container -->
+  <main class="predict-container">
+    <h1 class="section-title">Predict Parkinson's</h1>
+
+    <!-- Card for prediction results or prompt -->
+    <div class="predict-card">
+      {% if prediction_text %}
+        <!-- If we have a prediction, show it (green or red) -->
+        {% if 'Positive' in prediction_text %}
+          <h2 class="prediction-result positive">{{ prediction_text }}</h2>
+        {% elif 'Negative' in prediction_text %}
+          <h2 class="prediction-result negative">{{ prediction_text }}</h2>
+        {% else %}
+          <h2 class="prediction-result">{{ prediction_text }}</h2>
+        {% endif %}
+
+        <p class="prediction-detail">Jitter: <strong>{{ jitter_val }}</strong></p>
+        <p class="prediction-detail">Shimmer: <strong>{{ shimmer_val }}</strong></p>
+        <p class="prediction-detail">Mean F0: <strong>{{ mean_f0_val }}</strong></p>
+
+      {% else %}
+        <!-- Default prompt text (will change to file name on upload) -->
+        <p class="prediction-prompt" id="uploadPrompt">Upload an audio file to get a prediction.</p>
+        <!-- Close button (X) hidden by default -->
+        <span id="closeFile" class="close-file hidden">&times;</span>
+      {% endif %}
+    </div>
+
+    <!-- Form to upload audio -->
+    <div class="predict-form">
+      <form method="POST" action="{{ url_for('predict') }}" enctype="multipart/form-data">
+        <!-- A label styled as a button that triggers the file input -->
+        <label for="audio_file" class="file-button">Choose File</label>
+        <!-- The actual file input is hidden (styled in CSS) -->
+        <input type="file" name="audio_file" id="audio_file" accept="audio/*" required>
+
+        <button class="btn-secondary" type="submit">Predict</button>
+      </form>
+    </div>
+
+    <!-- Link back to home -->
+    <div class="back-link">
+      <a href="{{ url_for('home') }}">&#171; Back to Home</a>
+    </div>
+  </main>
+
+  <!-- JavaScript to update prompt text and handle close button -->
+  <script>
+    const fileInput = document.getElementById('audio_file');
+    const uploadPrompt = document.getElementById('uploadPrompt');
+    const closeFileBtn = document.getElementById('closeFile');
+
+    fileInput.addEventListener('change', () => {
+      if (fileInput.files && fileInput.files.length > 0) {
+        // Replace the default prompt with: "File selected: filename"
+        uploadPrompt.textContent = `File selected: ${fileInput.files[0].name}`;
+        // Show the close (X) button
+        closeFileBtn.classList.remove('hidden');
+      }
+    });
+
+    closeFileBtn.addEventListener('click', () => {
+      // Clear the file input
+      fileInput.value = '';
+      // Restore the default prompt
+      uploadPrompt.textContent = 'Upload an audio file to get a prediction.';
+      // Hide the close button
+      closeFileBtn.classList.add('hidden');
+    });
+  </script>
+
+</body>
 </html>
