@@ -402,3 +402,24 @@ input[type="file"] {
 .close-file:hover {
   color: red; /* The requested hover color */
 }
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensures the wrapper fills the entire viewport */
+}
+
+/* This will push the footer to the bottom of the flex container */
+.footer {
+  margin-top: auto;
+}
+@media(max-width:988px){
+  .wrapper{
+    gap: 100px;
+  }
+}
