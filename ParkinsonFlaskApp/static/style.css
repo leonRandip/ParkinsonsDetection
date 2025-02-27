@@ -418,8 +418,3 @@ html, body {
 .footer {
   margin-top: auto;
 }
-@media(max-width:988px){
-  .wrapper{
-    gap: 100px;
-  }
-}
