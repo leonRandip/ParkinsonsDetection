@@ -2,9 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <!-- Ensure mobile responsiveness -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Parkinson's Detection</title>
-  <link rel="icon" type="image/x-icon" href="../static/images/images.png">
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/images.png') }}">
+  <!-- Link to your external CSS file -->
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
@@ -32,7 +36,7 @@
         </div>
       </div>
       <div class="hero-image">
-        <img src="../static//images/perform.png" alt="Hero Placeholder" />
+        <img src="{{ url_for('static', filename='images/perform.png') }}" alt="Hero Placeholder" />
       </div>
     </header>
 
@@ -40,16 +44,54 @@
     <section class="algorithm-results">
       <h2>Algorithm Results</h2>
       <div class="algo-card-container">
-        <!-- (Cards here...) -->
+        <!-- Card: Naive Bayes -->
+        <div class="algo-card">
+          <img src="{{ url_for('static', filename='images/naive_bayes.png') }}" alt="Naive Bayes (80.56%)" />
+          <h3>Naive Bayes</h3>
+          <p>Accuracy: 80.56%</p>
+        </div>
+        <!-- Card: SVM -->
+        <div class="algo-card">
+          <img src="{{ url_for('static', filename='images/svm.png') }}" alt="SVM (51.39%)" />
+          <h3>SVM</h3>
+          <p>Accuracy: 51.39%</p>
+        </div>
+        <!-- Card: Random Forest -->
+        <div class="algo-card random-forest">
+          <img src="{{ url_for('static', filename='images/random_forest.png') }}" alt="Random Forest (94.44%)" />
+          <h3>Random Forest</h3>
+          <p>Accuracy: 94.44%</p>
+        </div>
+        <!-- Card: Logistic Regression -->
+        <div class="algo-card">
+          <img src="{{ url_for('static', filename='images/logistic_regression.png') }}" alt="Logistic Regression (88.89%)" />
+          <h3>Logistic Regression</h3>
+          <p>Accuracy: 88.89%</p>
+        </div>
+        <!-- Card: K-NN -->
+        <div class="algo-card">
+          <img src="{{ url_for('static', filename='images/knn.png') }}" alt="K-NN (72.22%)" />
+          <h3>K-NN</h3>
+          <p>Accuracy: 72.22%</p>
+        </div>
+        <!-- Card: ROC Curve -->
+        <div class="algo-card">
+          <img src="{{ url_for('static', filename='images/roc.png') }}" alt="ROC CURVE" />
+          <h3>ROC CURVE</h3>
+          <p></p>
+        </div>
       </div>
     </section>
 
-    <!-- (Optional) Feedback Section -->
+    <!-- Feedback Section -->
     <section class="preview-section">
       <h2>Send Feedback</h2>
       <div class="preview-content">
-        <textarea rows="6" placeholder="Type your feedback here..."></textarea>
-        <button class="btn-primary">Send</button>
+        <form method="POST" action="{{ url_for('send_feedback') }}">
+          <textarea name="feedback_text" rows="6" placeholder="Type your feedback here..." required></textarea>
+          <br><br>
+          <button type="submit" class="btn-primary">Send Feedback</button>
+        </form>
       </div>
       <p class="small-text">
         "Your feedback is important to us. Please share your thoughts, suggestions, or any issues you faced."
@@ -61,10 +103,5 @@
       <p>© All rights reserved.</p>
     </footer>
   </div>
-  
-  <!-- JavaScript for Modal Behavior (if any) -->
-  <script>
-    // Your existing modal JS code...
-  </script>
 </body>
 </html>
