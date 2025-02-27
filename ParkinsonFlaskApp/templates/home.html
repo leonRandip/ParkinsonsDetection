@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>Parkinson's Detection</title>
+  <link rel="icon" type="image/x-icon" href="../static//images/images.png">
   <!-- Link to your external CSS file -->
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
   <!-- Example Google Font (optional) -->
@@ -14,7 +15,7 @@
   <!-- Navigation Bar -->
   <nav class="navbar">
     <div class="navbar-left">
-      <a href="#" class="logo">Parkinson's Detection</a>
+      <a href="{{ url_for('home') }}" class="logo">Parkinson's Detection</a>
     </div>
     <div class="navbar-right">
       <a href="{{ url_for('predict') }}" class="btn-primary">Predict</a>
@@ -62,7 +63,7 @@
       </div>
 
       <!-- Card 3: Random Forest -->
-      <div class="algo-card">
+      <div class="algo-card random-forest">
         <img src="static/images/random_forest.png" alt="Random Forest (94.44%)" />
         <h3>Random Forest</h3>
         <p>Accuracy: 94.44%</p>

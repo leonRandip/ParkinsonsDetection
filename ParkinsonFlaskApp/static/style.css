@@ -386,7 +386,9 @@ input[type="file"] {
 .hidden {
   display: none;
 }
-
+.random-forest{
+  border: 5px solid #7c3aed; 
+}
 /* The close-file button (X) style */
 .close-file {
   margin-left: 0.5rem;

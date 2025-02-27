@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>Parkinson's Detection</title>
+  <link rel="icon" type="image/x-icon" href="../static//images/images.png">
   <!-- Link to your Flask static CSS -->
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
@@ -14,13 +15,16 @@
     crossorigin="anonymous"
     referrerpolicy="no-referrer"
   />
+
+  <!-- Include Chart.js from a CDN so we can draw the chart if there's a prediction -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
   <!-- Navigation Bar -->
   <nav class="navbar">
     <div class="navbar-left">
-      <a href="#" class="logo">Parkinson's Detection</a>
+      <a href="{{ url_for('home') }}" class="logo">Parkinson's Detection</a>
     </div>
     <div class="navbar-right">
       <!-- Home icon link -->
@@ -49,7 +53,6 @@
         <p class="prediction-detail">Jitter: <strong>{{ jitter_val }}</strong></p>
         <p class="prediction-detail">Shimmer: <strong>{{ shimmer_val }}</strong></p>
         <p class="prediction-detail">Mean F0: <strong>{{ mean_f0_val }}</strong></p>
-
       {% else %}
         <!-- Default prompt text (will change to file name on upload) -->
         <p class="prediction-prompt" id="uploadPrompt">Upload an audio file to get a prediction.</p>
@@ -74,6 +77,85 @@
     <div class="back-link">
       <a href="{{ url_for('home') }}">&#171; Back to Home</a>
     </div>
+
+    <!-- If there's a prediction, show the chart below the link -->
+    {% if prediction_text %}
+    <section style="max-width: 700px; margin: 2rem auto;">
+      <canvas id="comparisonChart"></canvas>
+    </section>
+
+    <script>
+      // Parse the Jinja values as floats (default to 0 if not set)
+      const userJitter = parseFloat("{{ jitter_val|default('0') }}");
+      const userShimmer = parseFloat("{{ shimmer_val|default('0') }}");
+      const userMeanF0 = parseFloat("{{ mean_f0_val|default('0') }}");
+
+      // Example "normal" baseline (non-PD) - adjust as needed
+      const normalJitter = 0.0019;
+      const normalShimmer = 0.4147;
+      const normalMeanF0 = 50.9369;
+
+      // Example "Positive PD" baseline - adjust as needed
+      const pdJitter = 0.0066;
+      const pdShimmer = 0.3348;
+      const pdMeanF0 = 21.2345;
+
+      // We have 3 metrics: Jitter, Shimmer, MeanF0
+      const labels = ["Jitter", "Shimmer", "Mean F0"];
+
+      const dataNormal = [normalJitter, normalShimmer, normalMeanF0];
+      const dataPD = [pdJitter, pdShimmer, pdMeanF0];
+      const dataUser = [userJitter, userShimmer, userMeanF0];
+
+      const ctx = document.getElementById('comparisonChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: "Normal Baseline",
+              data: dataNormal,
+              borderColor: "#2ecc71", // green
+              fill: false,
+              tension: 0.1
+            },
+            {
+              label: "Positive PD Baseline",
+              data: dataPD,
+              borderColor: "#e74c3c", // red
+              fill: false,
+              tension: 0.1
+            },
+            {
+              label: "Your Audio Input",
+              data: dataUser,
+              borderColor: "#3498db", // blue
+              fill: false,
+              tension: 0.1
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            title: {
+              display: true,
+              text: "Comparison of Jitter, Shimmer, and Mean F0"
+            },
+            legend: {
+              display: true
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    </script>
+    {% endif %}
   </main>
 
   <!-- JavaScript to update prompt text and handle close button -->
@@ -84,19 +166,14 @@
 
     fileInput.addEventListener('change', () => {
       if (fileInput.files && fileInput.files.length > 0) {
-        // Replace the default prompt with: "File selected: filename"
         uploadPrompt.textContent = `File selected: ${fileInput.files[0].name}`;
-        // Show the close (X) button
         closeFileBtn.classList.remove('hidden');
       }
     });
 
     closeFileBtn.addEventListener('click', () => {
-      // Clear the file input
       fileInput.value = '';
-      // Restore the default prompt
       uploadPrompt.textContent = 'Upload an audio file to get a prediction.';
-      // Hide the close button
       closeFileBtn.classList.add('hidden');
     });
   </script>
