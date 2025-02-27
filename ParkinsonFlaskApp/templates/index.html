@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Model Accuracies</title>
+  </head>
+  <body>
+    <h1>Model Accuracies</h1>
+    <table border="1">
+      <tr>
+        <th>Model</th>
+        <th>Accuracy</th>
+      </tr>
+      {% for model, acc in accuracies.items() %}
+      <tr>
+        <td>{{ model }}</td>
+        <td>{{ acc }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    <br>
+    <a href="{{ url_for('predict') }}">Go to Prediction Page</a>
+  </body>
+</html>

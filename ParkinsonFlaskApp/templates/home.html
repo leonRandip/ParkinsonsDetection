@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Parkinson's Detection</title>
+  <!-- Link to your external CSS file -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  <!-- Example Google Font (optional) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="navbar-left">
+      <a href="#" class="logo">Parkinson's Detection</a>
+    </div>
+    <div class="navbar-right">
+      <a href="{{ url_for('predict') }}" class="btn-primary">Predict</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero-section">
+    <div class="hero-content">
+      <h1>Parkinson's Detection<br/>Using Voice & Machine Learning</h1>
+      <p class="tagline">
+        Detect Parkinson's disease with just a voice sample. Our model can predict with high accuracy.
+      </p>
+      <div class="hero-buttons">
+        <a href="{{ url_for('predict') }}" class="btn-secondary">Predict Now</a>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img src="../static//images/perform.png" alt="Hero Placeholder" />
+    </div>
+  </header>
+
+  <!-- Algorithm Results Section -->
+  <section class="algorithm-results">
+    <h2>Algorithm Results</h2>
+    <div class="algo-card-container">
+
+      <!-- Example Card 1: Naive Bayes -->
+      <div class="algo-card">
+        <!-- 
+          If you're using Flask's static folder:
+          <img src="{{ url_for('static', filename='images/naive_bayes.png') }}" 
+          alt="Naive Bayes Screenshot" />
+        -->
+        <img src="static/images/naive_bayes.png" alt="Naive Bayes (80.56%)" />
+        <h3>Naive Bayes</h3>
+        <p>Accuracy: 80.56%</p>
+      </div>
+
+      <!-- Card 2: SVM -->
+      <div class="algo-card">
+        <img src="static/images/svm.png" alt="SVM (51.39%)" />
+        <h3>SVM</h3>
+        <p>Accuracy: 51.39%</p>
+      </div>
+
+      <!-- Card 3: Random Forest -->
+      <div class="algo-card">
+        <img src="static/images/random_forest.png" alt="Random Forest (94.44%)" />
+        <h3>Random Forest</h3>
+        <p>Accuracy: 94.44%</p>
+      </div>
+
+      <!-- Card 4: Logistic Regression -->
+      <div class="algo-card">
+        <img src="static/images/logistic_regression.png" alt="Logistic Regression (88.89%)" />
+        <h3>Logistic Regression</h3>
+        <p>Accuracy: 88.89%</p>
+      </div>
+
+      <!-- Card 5: K-NN -->
+      <div class="algo-card">
+        <img src="static/images/knn.png" alt="K-NN (72.22%)" />
+        <h3>K-NN</h3>
+        <p>Accuracy: 72.22%</p>
+      </div>
+
+       <div class="algo-card">
+        <img src="static/images/roc.png" alt="ROC CURVE" />
+        <h3>ROC CURVE</h3>
+        <p></p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Modal Markup: hidden by default -->
+  <div id="algoModal" class="algo-modal">
+    <span id="closeModal" class="close">&times;</span>
+    <img class="algo-modal-content" id="algoModalImg" />
+    <div id="algoCaption"></div>
+  </div>
+
+  <!-- (Optional) Feedback Section -->
+  <section class="preview-section">
+    <h2>Send Feedback</h2>
+    <div class="preview-content">
+      <textarea rows="6" placeholder="Type your feedback here..."></textarea>
+      <button class="btn-primary">Send</button>
+    </div>
+    <p class="small-text">
+      "Your feedback is important to us. Please share your thoughts, suggestions, or any issues you faced."
+    </p>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© All rights reserved.</p>
+  </footer>
+
+  <!-- JavaScript for Modal Behavior -->
+  <script>
+    const modal = document.getElementById('algoModal');
+    const modalImg = document.getElementById('algoModalImg');
+    const captionText = document.getElementById('algoCaption');
+    const closeBtn = document.getElementById('closeModal');
+
+    // For each image in an algo card, add a click event to open the modal
+    document.querySelectorAll('.algo-card img').forEach(img => {
+      img.addEventListener('click', () => {
+        modal.style.display = 'block';
+        modalImg.src = img.src;            // Show the same image in large
+        captionText.innerText = img.alt;   // Use the alt text as caption
+      });
+    });
+
+    // Close the modal when clicking the close button
+    closeBtn.onclick = function() {
+      modal.style.display = 'none';
+    };
+
+    // Close modal if user clicks outside the image
+    window.addEventListener('click', event => {
+      if (event.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+  </script>
+
+</body>
+</html>

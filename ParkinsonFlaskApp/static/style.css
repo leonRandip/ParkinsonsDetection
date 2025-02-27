@@ -1,0 +1,261 @@
+/* RESET/BASIC STYLES */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: #f7f8fa;
+  color: #333;
+}
+
+/* NAVBAR */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  padding: 1rem 2rem;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #4a4a4a;
+  text-decoration: none;
+}
+
+.navbar-right a {
+  margin-left: 1.25rem;
+  text-decoration: none;
+  color: #4a4a4a;
+  font-weight: 500;
+}
+
+.btn-primary {
+  padding: 0.5rem 1rem;
+  background-color: #7c3aed;
+  border: none;
+  color: #fff !important;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+  background-color: #5b4eff;
+}
+
+.btn-secondary {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: #fff;
+  color: #7c3aed;
+  text-decoration: none;
+  border: 2px solid #7c3aed;
+  border-radius: 5px;
+  font-weight: 600;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.btn-secondary:hover {
+  background-color: #7c3aed;
+  color: #fff;
+}
+
+/* HERO SECTION */
+.hero-section {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 3rem 2rem;
+  gap: 2rem;
+  background: linear-gradient(to right, #f0f3ff, #ffffff);
+}
+
+.hero-content {
+  flex: 1;
+  min-width: 300px;
+}
+
+.hero-content h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+  color: #272727;
+}
+
+.tagline {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  color: #666;
+}
+
+.hero-buttons a {
+  margin-right: 2rem;
+}
+
+.hero-image {
+  flex: 1;
+  border: #7c3aed solid 5px;
+  border-radius: 8px;
+  min-width: 300px;
+  text-align: center;
+}
+
+.hero-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* ALGORITHM RESULTS */
+.algorithm-results {
+  text-align: center;
+  padding: 2rem;
+  background-color: #fff;
+}
+
+.algorithm-results h2 {
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+}
+
+.algo-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.algo-card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  width: 220px;
+  padding: 1rem;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.algo-card:hover {
+  transform: translateY(-3px);
+}
+
+.algo-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin-bottom: 0.75rem;
+}
+
+.algo-card h3 {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.algo-card p {
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 0;
+}
+
+/* MODAL */
+.algo-modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto; /* enable scroll if needed */
+  background-color: rgba(0, 0, 0, 0.7); /* dark overlay */
+  text-align: center;
+  padding-top: 60px;
+}
+
+.algo-modal-content {
+  max-width: 80%;
+  max-height: 80%;
+  margin: auto;
+  display: block;
+  border-radius: 6px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.close {
+  position: absolute;
+  top: 30px;
+  right: 40px;
+  color: #fff;
+  font-size: 36px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: #bbb;
+}
+
+#algoCaption {
+  margin: 15px auto 0 auto;
+  width: 80%;
+  max-width: 600px;
+  color: #ccc;
+  font-size: 1rem;
+}
+
+/* PREVIEW SECTION */
+.preview-section {
+  text-align: center;
+  padding: 2rem;
+  background-color: #fff;
+  margin: 2rem auto;
+  max-width: 800px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.preview-section h2 {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.preview-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.preview-content textarea {
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: vertical;
+}
+
+.small-text {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 1rem;
+}
+
+/* FOOTER */
+.footer {
+  background: #fff;
+  text-align: center;
+  padding: 2rem 1rem;
+  margin-top: 2rem;
+  border-top: 1px solid #eee;
+}
