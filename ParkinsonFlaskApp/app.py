@@ -38,6 +38,7 @@ def predict():
 
         # Load the audio with librosa
         try:
+            librosa.set_audio_backend('soundfile')  # Force safe backend to avoid numba issues
             y, sr = librosa.load(audio_file, sr=None)
         except Exception as e:
             return f"Error loading audio: {e}"
