@@ -24,7 +24,7 @@ except Exception as e:
     rf_model = None
     print(f"Failed to load RandomForest model: {e}")
 
-@app.route('/')
+@app.route("/")
 def home():
     return render_template('home.html', accuracies=model_accuracies)
 
